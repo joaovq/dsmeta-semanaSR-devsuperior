@@ -18,7 +18,7 @@ O objetivo deste projeto é construir uma aplicação completa, unindo o back en
 
 ![image](https://user-images.githubusercontent.com/101160670/188534828-18e564a5-6515-41e0-b3bc-7470841a44c5.png)
 
-# O que o projeto faz??
+# ☑️ O que o projeto faz??
 
 
 - Interface gráfica de um site de vendas
@@ -26,10 +26,16 @@ O objetivo deste projeto é construir uma aplicação completa, unindo o back en
 - Envio de mensagens via sms
 
 
-# Tecnologias utilizadas no projeto
+# 🧑‍💻 Tecnologias utilizadas no projeto
 
 - [Java Development Kit- jdk 11](https://www.azul.com/downloads/?package=jdk#download-openjdk).
 - [Spring Boot](https://spring.io/) 
+- [Spring Initializr](https://start.spring.io/)
+  - Dependências:
+    - Spring Web
+    - Spring Java Persistence API (JPA)
+    - Spring H2 Database
+    - Spring Security
 - [Node Js 16](https://nodejs.org/en/)
 - [Yarn](https://yarnpkg.com/) 
 - ⚛️ [React Framework](https://pt-br.reactjs.org/docs/getting-started.html)
@@ -120,7 +126,7 @@ export default App
 ![image](https://user-images.githubusercontent.com/101160670/188542641-8b5529b6-3033-4cf2-b03c-4692616d3e31.png)
 
 
-## Utilizando o Date Picker e o useState
+## 📅 Utilizando o Date Picker e o useState
 
 O DatePicker é um component criado para manipular as data, de forma simples e reutilizavel.
 
@@ -160,6 +166,12 @@ import "react-datepicker/dist/react-datepicker.css";
 
 Isso será extremamente útil nas aulas seguintes, quando for possível unir com front-end com o back-end Java e Spring.
 
+
+# 🏆 Desafios Pessoais
+
+- [ ] Implementar a API do Swagger, para manutenção da aplicação e aprendizagem.
+- [ ] Pesquisar e adicionar na aplicação, dois ou mais recursos do React.
+- [ ] Ao invés do h2, utilizar o mySQL ou qualquer outro banco de dados na aplicação.
 
 # 💡 Como os Usuários podem usar esse projeto?
 
