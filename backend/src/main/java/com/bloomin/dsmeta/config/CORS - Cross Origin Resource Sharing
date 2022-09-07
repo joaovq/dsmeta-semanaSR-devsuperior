@@ -1,0 +1,23 @@
+Cross-Origin Resource Sharing (Compartilhamento de recursos com origens diferentes) é um mecanismo
+que usa cabeçalhos adicionais
+HTTP
+para informar a um navegador que permita que um aplicativo Web seja executado em uma origem (domínio) com permissão para acessar recursos
+selecionados de um servidor em uma origem distinta. Um aplicativo Web executa um requisição cross-origin HTTP
+ao solicitar um recurso que tenha uma origem diferente (domínio, protocolo e porta) da sua própria origem.
+
+Um exemplo de requisição cross-origin: o código JavaScript
+frontend de um aplicativo web disponível em http://domain-a.com usa XMLHttpRequest
+para fazer uma requisição para http://api.domain-b.com/data.json.
+
+Por motivos de segurança, navegadores restringem requisições cross-origin
+HTTP iniciadas por scripts. Por exemplo, XMLHttpRequest e Fetch API seguem
+a política de mesma origem (same-origin policy). Isso significa que um aplicativo
+web que faz uso dessas APIs só poderá fazer solicitações para recursos de mesma origem
+da qual o aplicativo foi carregado, a menos que a resposta da outra origem inclua os cabeçalhos CORS corretos.
+
+
+
+O mecânismo CORS suporta requisições seguras do tipo cross-origin
+e transferências de dados entre navegadores e servidores web. Navegadores modernos usam o CORS
+em uma API contêiner, como XMLHttpRequest ou Fetch, para ajudar a reduzir os riscos de
+requisições cross-origin HTTP.
