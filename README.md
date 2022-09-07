@@ -6,7 +6,7 @@ Foram 4 dias de imesão em tecnologias que estão em alta no mercado e utilizand
 
 O objetivo deste projeto é construir uma aplicação completa, unindo o back end, front end e banco de dados. Com isso, busca-se desenvolver um escopo de um site de controle de vendas, utilizando tecnologias que são bastante utilizadas atualmente, no mercado de trabalho.
 
-> Design feito pelo Acelino do Dev superior, que foi replicado para o browser. 
+> Design feito pelo Acenélio do Dev superior, que foi replicado para o browser. 
 
 ![image](https://user-images.githubusercontent.com/101160670/188534400-462d8746-f8dc-4325-947a-e1cbc9db0741.png)
 
