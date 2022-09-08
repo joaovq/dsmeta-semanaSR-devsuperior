@@ -40,7 +40,7 @@ O objetivo deste projeto é construir uma aplicação completa, unindo o back en
 - [Yarn](https://yarnpkg.com/) 
 - ⚛️ [React Framework](https://pt-br.reactjs.org/docs/getting-started.html)
 
-# Aula 1
+# Aula 1 - Estruturação do Ftont-end com React
 
 ### Nesta primeira aula foi feito:
 - Organização das pastas do projeto
@@ -166,6 +166,16 @@ import "react-datepicker/dist/react-datepicker.css";
 
 Isso será extremamente útil nas aulas seguintes, quando for possível unir com front-end com o back-end Java e Spring.
 
+
+# Aula 2 - Criação do Back-end Java
+
+## Objetivos da aula 2
+
+- Implementar o back end
+- Acesso a banco de dados
+- Criar endpoints da API REST
+- Integração com SMS
+- Implantação na nuvem
 
 # 🏆 Desafios Pessoais
 
