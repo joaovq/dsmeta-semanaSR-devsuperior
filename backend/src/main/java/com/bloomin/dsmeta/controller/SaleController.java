@@ -3,6 +3,8 @@ package com.bloomin.dsmeta.controller;
 import com.bloomin.dsmeta.entity.Sale;
 import com.bloomin.dsmeta.service.impl.SaleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,11 +16,18 @@ public class SaleController {
     @Autowired
     private SaleServiceImpl service;
 
-    @GetMapping("/get_all")
-    public List<Sale> getAll(){
-        return service.getAll();
 
+//    Colocando os resultados em páginas
+//    A requisição é feita de 20 em 20
+//    Requisição no postman http://localhost:8080/sales/findSales?minDate=2021-11-21&maxDate=2022-05-04
+    @GetMapping("/findSales")
+    public Page<Sale> findSales(@RequestParam(value = "minDate", defaultValue = "") String minDate,
+                                @RequestParam(value = "maxDate", defaultValue = "") String maxDate,
+                                Pageable pageable){
+        return service.getAll(minDate, maxDate, pageable);
     }
+
+
     @GetMapping("/get_sale/{id}")
     public ResponseEntity<Sale> getSale(@PathVariable Long id){
         Sale saleById = service.getSaleById(id);
