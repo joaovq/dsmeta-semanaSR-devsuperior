@@ -28,7 +28,7 @@ public class SaleController {
     @PostMapping("/post")
     public ResponseEntity<String> post(@RequestBody Sale sale){
         service.create(sale);
-        String post= "post feito!"/
+        String post= "post feito!";
         return ResponseEntity.status(201).body(post);
     }
 
