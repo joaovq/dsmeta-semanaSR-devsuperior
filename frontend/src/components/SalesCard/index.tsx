@@ -2,7 +2,8 @@ import NotificationButton from '../NotificationButton'
 import './style.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function SalesCard() {
 
@@ -11,6 +12,16 @@ function SalesCard() {
   const max = new Date();
   const [minDate, setMinDate] = useState(min);
   const [maxDate,setMaxDate] = useState(max);
+
+  // O axios.get() retorna um objeto chamado Promise.
+  //  É um objeto que retorna uma operação que pode dar certo ou falhar
+  //  Dessa forma utilizamos o then, caso der certo. 
+  // Colocamos uma função para esse objeto fazer quando tiver resposta.
+  useEffect(() => {  
+    axios.get("http://localhost:8080/sales/findSales").then(response => {
+      console.log(response.data);
+    });
+  }, []);
 
   return (
     <div className="dsmeta-card">
@@ -27,7 +38,7 @@ function SalesCard() {
         <div className="dsmeta-form-control-container">
           <DatePicker
             selected={maxDate}
-            onChange={(date: Date) => setMinDate(date)}
+            onChange={(date: Date) => setMaxDate(date)}
             className="dsmeta-form-control"
             dateFormat="dd/MM/yyyy"
           />
