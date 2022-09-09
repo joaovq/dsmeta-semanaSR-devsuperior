@@ -22,12 +22,19 @@ function SalesCard() {
   //  É um objeto que retorna uma operação que pode dar certo ou falhar
   //  Dessa forma utilizamos o then, caso der certo. 
   // Colocamos uma função para esse objeto fazer quando tiver resposta.
-  useEffect(() => {  
-    axios.get(`${BASE_URL}/sales/findSales`).then(response => {
+  useEffect(() => {
+    
+    const dMin = minDate.toISOString().slice(0,10);
+
+    const dMax = maxDate.toISOString().slice(0,10);
+
+
+    axios.get(`${BASE_URL}/sales/findSales?minDate=${dMin}&maxDate=${dMax}`).then(response => {
       setSales(response.data.content)
-      console.log(response.data)
     });
-  }, []);
+    // Colocamos o minDate e o maxDate na lista dependências do useEffect para ele entender os efeitos
+    // das duas variavéis. Ele vai atualizar quando algum dos dados mudar.
+  }, [minDate,maxDate]);
 
   return (
     <div className="dsmeta-card">
