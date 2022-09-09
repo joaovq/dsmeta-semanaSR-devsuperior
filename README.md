@@ -2,6 +2,11 @@
 > Repositório destinado para projeto da semana Spring React do Dev superior. Utilizando Java, JavaScript e Frameworks.
 Foram 4 dias de imersão em tecnologias que estão em alta no mercado e utilizando elas na prática.
 
+# Index
+
+- [Aula 1](https://github.com/joaovq/dsmeta-semanaSR-devsuperior/edit/main/README.md#aula-1---estrutura%C3%A7%C3%A3o-do-ftont-end-com-react)
+- [Aula 2](https://github.com/joaovq/dsmeta-semanaSR-devsuperior/edit/main/README.md#aula-2---cria%C3%A7%C3%A3o-do-back-end-java)
+
 # 🎯 Objetivo 
 
 O objetivo deste projeto é construir uma aplicação completa, unindo o back end, front end e banco de dados. Com isso, busca-se desenvolver um escopo de um site de controle de vendas, utilizando tecnologias que são bastante utilizadas atualmente, no mercado de trabalho.
@@ -40,7 +45,7 @@ O objetivo deste projeto é construir uma aplicação completa, unindo o back en
 - [Yarn](https://yarnpkg.com/) 
 - ⚛️ [React Framework](https://pt-br.reactjs.org/docs/getting-started.html)
 
-# Aula 1 - Estruturação do Ftont-end com React
+# Aula 1 - Estruturação do Front-end com React
 
 ### Nesta primeira aula foi feito:
 - Organização das pastas do projeto
@@ -417,7 +422,141 @@ heroku git:remote -a <nome-do-app>
 git remote -v
 git subtree push --prefix backend heroku main
  ```
+ 
+# Aula 3 - Integração monorepo
 
+- Integrar back end e front end
+- Implantar o front end
+
+## Instalação do Axios e useEffect 
+
+- Link: SalesCard - https://github.com/joaovq/dsmeta-semanaSR-devsuperior/blob/main/frontend/src/components/SalesCard/index.tsx
+
+Axios é um cliente HTTP baseado-em-promessas para o node.js e para o navegador. É isomórfico (= pode rodar no navegador e no node.js com a mesma base de código). No lado do servidor usa o código nativo do node.js - o modulo http, enquanto no lado do cliente (navegador) usa XMLHttpRequests.
+
+### Documentação
+- https://axios-http.com/ptbr/docs/intro
+
+useEffect
+
+O Effect Hook (Hook de Efeito) te permite executar efeitos colaterais em componentes funcionais. Quando rodamos a aplicação, eles vai entender os efeitos de mudanças na API. 
+Buscar dados, configurar uma subscription, e mudar o DOM manualmente dentro dos componentes React são exemplos de efeitos colaterais. Para isto, utilizamos os hooks para nos auxiliar nestas tarefas e neste caso, especialmente, utilizaremos o useEffect.
+
+### Documentação useEffect
+- https://pt-br.reactjs.org/docs/hooks-effect.html
+
+
+```shell
+# instalação do pacote de dependências do axios
+yarn add axios@0.27.2
+```
+
+- Teste de utilização
+
+No Sales card, utilizamos o useEffect como teste:
+
+```typescript
+useEffect(() => {  
+    console.log('Teste')
+  }, []);
+```
+
+Resultado:
+![image](https://user-images.githubusercontent.com/101160670/189415286-8748ef64-daf0-476a-a41e-ac8b482d2722.png)
+
+
+Após feito o teste e confirmar que está funcionando, utilizamos o useEffect para testar uma requisição, que é o nosso objetivo:
+
+O ``axios.get()`` retorna um objeto chamado Promise. O Promise é um objeto que retorna uma operação que pode dar certo ou falhar e dessa forma utilizamos o ``then()``, caso der certo. Colocamos uma função para esse objeto fazer quando tiver resposta:
+
+No caso abaixo, vamos mostrar no console a resposta dos dados do Promise(na variavel response):
+
+```typescript
+ useEffect(() => {  
+    axios.get("http://localhost:8080/sales/findSales").then(response => {
+      console.log(response.data);
+    });
+  }, []);
+
+```
+
+Resultado:
+
+![image](https://user-images.githubusercontent.com/101160670/189418155-364ae01e-6d5d-4980-9586-846e8a6d0bfe.png)
+
+
+COMMIT: Axios, useEffect first request
+
+
+## Listagem de vendas
+
+- Link: SalesCard - https://github.com/joaovq/dsmeta-semanaSR-devsuperior/blob/main/frontend/src/components/SalesCard/index.tsx
+
+Na pasta do projeto do frontend, criamos uma pasta chamada ``utils`` e dentro dela um arquivo chamado ``request.ts``. O objetivo é pegar a listagem de vendas do banco de dados e utilizar no front end.
+
+Definição da BASE_URL(Colocamos dentro do arquivo):
+
+O  objetivo é colocar uma url base para a requisição.
+
+Neste caso, ele vai pegar uma variável de ambiente se existir. Se não existir, por padrão, vai utilizar o localhost:8080
+
+```typescript
+export const BASE_URL = import.meta.env.VITE_BACKEND_URL ?? "http://localhost:8080";
+```
+
+- No SalesCard
+
+ATENÇÃO: No lugar de aspas duplas (""), colocamos crase (` `) para funcionar. 
+
+```typescript
+ useEffect(() => {  
+    axios.get(`${BASE_URL}/sales/findSales`).then(response => {
+      console.log(response.data);
+    });
+  }, []);
+```
+
+### Criação da pasta models
+
+Foi criado uma pasta chamada ``models`` e dentro dela um arquivo chamado ``sale.ts`` para definirmos o tipo de dado.
+
+```typescript
+export type Sale = {
+    id: number; 
+    name: string; 
+    visited: number; 
+    deals: number; 
+    amount: number;
+}
+```
+Após isto, no SalesCard, vamos criar um useState para armazenar essa lista de vendas. Com isso, o objetivo é atualizar o nome dos vendedores e  os dados diretamente do banco de dados.
+
+COMMIT: Sale listing
+
+## Passando as datas como argumento.
+
+Para filtrarmos pelas data, vamos passar na requisição a data minima e a data máxima.
+
+Fizemos o tratamento das datas minDate e maxDate colocando no padrão do backend. Após isso, colocamos então pelo react, no ``useEffect()``, as variaveis no lugar das datas.
+
+Requisição: http://localhost:8080/sales/findSales?minDate=2021-11-21&maxDate=2022-05-04
+
+```typescript
+ useEffect(() => {
+    
+    const dMin = minDate.toISOString().slice(0,10);
+
+    const dMax = maxDate.toISOString().slice(0,10);
+
+
+    axios.get(`${BASE_URL}/sales/findSales?minDate=${dMin}&maxDate=${dMax}`).then(response => {
+      setSales(response.data.content)
+    });
+  }, []);
+
+```
+
+Loading...
 
 # 🏆 Desafios Pessoais
 
