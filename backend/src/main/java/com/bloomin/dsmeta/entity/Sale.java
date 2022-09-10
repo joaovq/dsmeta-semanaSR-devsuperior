@@ -10,6 +10,7 @@ import java.util.Date;
 @Entity
 @Table(name = "tb_sales")
 public class Sale {
+//    Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_sale", nullable = false)
