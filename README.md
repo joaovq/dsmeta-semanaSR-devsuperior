@@ -1,4 +1,7 @@
 # ⚛️ DS Meta - Semana Spring-React 
+
+![image](https://user-images.githubusercontent.com/101160670/189468561-a156abec-a037-4f0c-b409-cd57b463f139.png)
+
 > Repositório destinado para projeto da semana Spring React do Dev superior. Utilizando Java, JavaScript e Frameworks.
 Foram 4 dias de imersão em tecnologias que estão em alta no mercado e utilizando elas na prática.
 
@@ -6,6 +9,7 @@ Foram 4 dias de imersão em tecnologias que estão em alta no mercado e utilizan
 
 - [Aula 1](https://github.com/joaovq/dsmeta-semanaSR-devsuperior/edit/main/README.md#aula-1---estrutura%C3%A7%C3%A3o-do-ftont-end-com-react)
 - [Aula 2](https://github.com/joaovq/dsmeta-semanaSR-devsuperior/edit/main/README.md#aula-2---cria%C3%A7%C3%A3o-do-back-end-java)
+- [Aula 3](https://github.com/joaovq/dsmeta-semanaSR-devsuperior/edit/main/README.md#aula-3---integra%C3%A7%C3%A3o-monorepo)
 
 # 🎯 Objetivo 
 
@@ -556,7 +560,112 @@ Requisição: http://localhost:8080/sales/findSales?minDate=2021-11-21&maxDate=2
 
 ```
 
-Loading...
+## Envio de notificação através do Front - end
+
+Utizamos os props, que são os parâmetros que um componente do react pode receber. Isso vai fazer com que o click no botão vai enviar a notificação através do back-end.
+
+```typescript
+
+type Props = {
+  saleId:number;
+}
+
+function NotificationButton({saleId}: Props) {
+
+  function handleClick(id:number){
+    axios(`${BASE_URL}/sales/${id}/notification`).then(response =>{
+      console.log("Sucesso");
+    })
+  }
+    return (
+        <div className="dsmeta-red-btn" onClick={()=>{
+          handleClick(saleId);
+        }}>
+        <img src={icon} alt="Notificar" />
+      </div>
+    )
+  }
+
+```
+
+Quando chamamos o componente em outro componente, precisamos passar o props para a função funcionar.
+
+```typescript
+
+<NotificationButton saleId={sale.id} />
+
+```
+COMMIT: Send notification
+
+## Mensagem Toast de Confirmação.
+
+Vamos utilizar o Toastfy, que é uma biblioteca utilizada para criar mensagens toasts
+
+Link: https://www.npmjs.com/package/react-toastify
+
+
+- Para istalar a biblioteca no projeto
+```shell
+yarn add react-toastify@9.0.5
+
+```
+
+No App.tsx:
+
+```typescript
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// No inicio da função (return)
+
+<ToastContainer/>
+```
+
+COMMIT: Toast
+
+## Deploy no netlify
+
+https://www.netlify.com/
+
+Antes de qualquer coisa,  foi colocado  ``window.React = React`` no seu main.tsx conforme abaixo, e salve um novo commit:
+
+```typescript
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './index.css'
+
+window.React = React
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)
+```
+
+COMMIT: window.React main.tsx
+
+- Deploy básico
+
+	- Base directory: frontend
+	- Build command: yarn build
+	- Publish directory: frontend/dist
+	- Variáveis de ambiente:
+	   - VITE_BACKEND_URL
+	- Configurações adicionais
+
+- Netlify config
+
+![image](https://user-images.githubusercontent.com/101160670/189469898-fcb0e904-e0f4-4414-8e47-73fe8c292b19.png)
+
+![image](https://user-images.githubusercontent.com/101160670/189470086-3df06cc2-f18b-4287-a7d4-b2288841b7e2.png)
+
+
+
+Site settings -> Domain Management: (colocar o nome que você quiser)
+Deploys -> Trigger deploy
+
 
 # 🏆 Desafios Pessoais
 
