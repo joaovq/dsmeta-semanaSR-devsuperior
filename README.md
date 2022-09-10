@@ -10,6 +10,7 @@ Foram 4 dias de imersão em tecnologias que estão em alta no mercado e utilizan
 - [Aula 1](https://github.com/joaovq/dsmeta-semanaSR-devsuperior/edit/main/README.md#aula-1---estrutura%C3%A7%C3%A3o-do-ftont-end-com-react)
 - [Aula 2](https://github.com/joaovq/dsmeta-semanaSR-devsuperior/edit/main/README.md#aula-2---cria%C3%A7%C3%A3o-do-back-end-java)
 - [Aula 3](https://github.com/joaovq/dsmeta-semanaSR-devsuperior/edit/main/README.md#aula-3---integra%C3%A7%C3%A3o-monorepo)
+- [Link do projeto](https://github.com/joaovq/dsmeta-semanaSR-devsuperior/edit/main/README.md#finalmente-o-link-do-site)
 
 # 🎯 Objetivo 
 
@@ -665,6 +666,10 @@ COMMIT: window.React main.tsx
 
 Site settings -> Domain Management: (colocar o nome que você quiser)
 Deploys -> Trigger deploy
+
+## Finalmente, o link do site
+
+Link: https://dsmeta-joaovq.netlify.app/
 
 
 # 🏆 Desafios Pessoais
