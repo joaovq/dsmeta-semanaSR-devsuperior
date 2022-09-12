@@ -674,7 +674,7 @@ Link: https://dsmeta-joaovq.netlify.app/
 
 # 🏆 Desafios Pessoais
 
-- [ ] Implementar a API do Swagger, para manutenção da aplicação e aprendizagem.
+- [ ] Implementar o Spring Boot Actuator, para manutenção da aplicação e aprendizagem.
 - [ ] Pesquisar e adicionar na aplicação, dois ou mais recursos do React.
 - [ ] Ao invés do h2, utilizar o mySQL ou qualquer outro banco de dados na aplicação.
 
