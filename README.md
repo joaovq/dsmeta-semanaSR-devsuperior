@@ -675,6 +675,107 @@ Link: https://dsmeta-joaovq.netlify.app/
 # 🏆 Desafios Pessoais
 
 - [ ] Implementar o Spring Boot Actuator, para manutenção da aplicação e aprendizagem.
+
+O Spring Boot Actuator é uma API que tem endpoints que devolvem um JSON com informações sobre a API. É uma facilidade para conseguir monitorar e acompanhar o andamento da nossa API e usado principalmente para expor informações operacionais sobre o aplicativo em execução - integridade, métricas, informações, despejo, env, etc. 
+
+- Docs-guide: https://www.baeldung.com/spring-boot-actuators
+
+Além do Actuator, utilizei o Spring Boot Admin:
+
+Spring Boot Admin é um projeto da codecentric para Gerenciar e monitorar aplicações SpringBoot. Criamos um novo projeto para monitorar outras as aplicações. Mostra tudo sobre a aplicação é bem completo.
+
+- Docs: https://github.com/codecentric/spring-boot-admin
+
+- Guide: https://www.baeldung.com/spring-boot-admin
+
+1. Teste no localhost.
+
+### Actuator
+
+Para implementar o Actuator no projeto Spring, primeiramente, adicionamos as dependências necessárias para controlar a aplicação.
+
+```xml
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+Além disso, para o monitoramento inicial da aplicação, colocamos configurações no application.properties:
+
+```properties
+management.endpoint.health.group.custom.show-components=always
+management.endpoint.health.group.custom.show-details=always
+management.endpoints.web.exposure.include=*
+
+#Trocamos a porta para não dar conflito, no teste.
+server.port=8081
+```
+ Com isso, a aplicação está pronta para o monitoramento básico por um admin, que implementamos mais a frente.
+ 
+ ### Spring Boot Admin
+ 
+ Para o Spring Boot Admin, criamos um projeto a parte para o monitoramento de uma ou mais aplicações Spring Boot.
+ 
+ Em primeiro momento, inserimos no pom.xml as dependências necessárias:
+ 
+ Na aplicação que vai ser monitorada pelo admin (client), utilizamos:
+ 
+ ```xml
+ <dependency>
+	<groupId>de.codecentric</groupId>
+	<artifactId>spring-boot-admin-starter-client</artifactId>
+	<version>2.7.4</version>
+</dependency>
+ 
+ ```
+ 
+ Para a aplicação que vamos administrar esse client (server), utilizamos dentro do ``<dependecies>``:
+ 
+ ```xml
+ <dependency>
+	<groupId>de.codecentric</groupId>
+	<artifactId>spring-boot-admin-starter-server</artifactId>
+</dependency>
+ ```
+ 
+ Após feito a adição das dependências e instalado, no server, colocamos a anotação @EnableAdminServer para indicar pro Spring Boot que vai subir o painel do Spring Boot Admin:
+ 
+ ```Java
+ @SpringBootApplication
+@EnableAdminServer
+public class ActuatorAdminApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ActuatorAdminApplication.class, args);
+	}
+
+}
+ ```
+ 
+ Por fim, no client, precisamos indicar o local que o o endpoint do server está. Como exemplo, colocamos no ``application.properties`` do client:
+ 
+ ```properties
+ spring.boot.admin.client.url=http://localhost:8080
+ ```
+ 
+ E o Resultado foi esse:
+ 
+ - Sem rodar a aplicação que vamos monitorar
+ 
+ ![image](https://user-images.githubusercontent.com/101160670/190431555-b08130bc-3352-4df3-a1b9-9e7445ff43a0.png)
+ 
+ 
+ - Rodando a aplicação que vamos monitorar
+ 
+ ![image](https://user-images.githubusercontent.com/101160670/190432400-9114d980-b7ed-465a-b0ec-cdb9e714390e.png)
+ 
+BRANCH: spring-boot-admin
+
+COMMIT: test actuator and admin-server/client
+
+
 - [ ] Pesquisar e adicionar na aplicação, dois ou mais recursos do React.
 - [ ] Ao invés do h2, utilizar o mySQL ou qualquer outro banco de dados na aplicação.
 
