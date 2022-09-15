@@ -794,6 +794,8 @@ spring.datasource.initialization-mode=always
 
 COMMIT: add environtment variables
 
+Além disso, trocamos o nome do `import.sql`, que serve como teste do banco de dados para `data.sql`.
+
 # 💡 Como os Usuários podem usar esse projeto?
 
 ## Para clonar esse projeto, faça:  
