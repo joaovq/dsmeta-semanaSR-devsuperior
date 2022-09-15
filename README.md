@@ -779,6 +779,21 @@ COMMIT: test actuator and admin-server/client
 - [ ] Pesquisar e adicionar na aplicação, dois ou mais recursos do React.
 - [ ] Ao invés do h2, utilizar o mySQL ou qualquer outro banco de dados na aplicação.
 
+BRANCH: mysql
+COMMIT: my sql properties
+
+Para adicionar o mySQL e criar o mesmo banco de dados no mySQL, foi utilizado as seguintes propriedades:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:${SERVER_PORT}/${DB_NAME}
+spring.datasource.username=${USER_DB}
+spring.datasource.password=${PASSWORD_DB}
+
+spring.datasource.initialization-mode=always
+```
+
+COMMIT: add environtment variables
+
 # 💡 Como os Usuários podem usar esse projeto?
 
 ## Para clonar esse projeto, faça:  
